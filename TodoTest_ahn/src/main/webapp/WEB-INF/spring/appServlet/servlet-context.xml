@@ -23,6 +23,7 @@
 	
 	<beans:bean id="loginInterceptor" class="org.study.todo.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="authInterceptor" class="org.study.todo.interceptor.AuthInterceptor"> </beans:bean>
+	
 	<interceptors>
 		<interceptor>
 			<mapping path="/login"/>
