@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.study.mapper.MemberMapper">
+
+	<insert id="insertMember">
+		insert into todo_member 
+		values (#{member_id}, #{member_pw}, #{member_name}, #{member_email})
+	</insert>
+
+	<select id="existMemberTable"  resultType="int">
+		select count(*) from tabs
+		where table_name = 'todo_member'
+	</select>
+
+
+	<update id="createMemberTable" >
+		create table todo_member (
+			member_id varchar2(100) not null primary key,
+			member_pw varchar2(100) not null,
+			member_name varchar2(200) not null,
+			member_email varchar2(200) not null )
+	</update>
+
+
+	<select id="existMemberId" resultType = "int" >
+		select count(*) from todo_member
+		where member_id = #{member_id}
+	</select>
+	
+	<select id="readMember" resultType = "org.study.todo.model.Member">
+		select * from todo_member
+	</select>
+	
+	<select id="readMemberOne" resultType = "org.study.todo.model.Member">
+		select * from todo_member 
+		where member_id = #{member_id}
+	</select>
+	
+	<update id="updateMember" >
+		update  todo_member
+		set member_pw=#{member_name}, member_name=#{member_name}, member_email=#{member_email}
+		where member_id = #{member_id}
+	</update>
+
+
+	<select id="todoList" resultType="org.study.todo.model.TodoRecord">
+		select tbl_todo.member_id, todo_member.member_name, tbl_todo.product_todo, tbl_todo.todo_date
+		from tbl_todo, todo_member
+		where todo_member.MEMBER_ID = tbl_todo.MEMBER_ID
+	</select>
+
+
+</mapper>
+
